@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Display time in a 12-hour format, ranging from 0 to 12 hours and 1 to 59 minutes.
+
+# Iterate and display hours from 0 to 12.
+# For each hour, iterate and display minutes from 1 to 59.
+
+# Requirements:
+# - Use a while loop (for and until are forbidden).
+# - Note that in this example, we display the first 70 lines using the head command.
+
+hour=0
+
+while [[ "$hour" -le 12 ]]; do
+        echo "Hour: $hour"
+        min=1
+        while [[ "$min" -le 59 ]]; do
+                echo "$min"
+                ((min++))
+        done
+        (( hour++ ))
+done

@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+#
+# Bash script that lists the contents of the current directory
+# in a formatted list, displaying only the part of the name
+# after the first dash (-).
+#
+# Requirements:
+# - Use a for loop (while and until are forbidden).
+# - Do not display hidden files.
+
+# Get the current working directory
+wd=$(pwd)
+
+# List the contents of the directory and extract the part after the first dash
+(ls "$wd") | cut -d '-' -f 2
