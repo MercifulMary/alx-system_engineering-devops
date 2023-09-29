@@ -1,13 +1,4 @@
 #!/usr/bin/env bash
 # Kills the 4-to_infinity_and_beyond process
 
-# Find the process ID of the target process
-process_id=$(pgrep -f 4-to_infinity_and_beyond)
-
-if [ -z "$process_id" ]; then
-  echo "Process 4-to_infinity_and_beyond not found."
-else
-  # Kill the process
-  kill "$process_id"
-  echo "Process 4-to_infinity_and_beyond (PID $process_id) killed."
-fi
+kill "$(pgrep -f 4-to_infinity_and_beyond)"

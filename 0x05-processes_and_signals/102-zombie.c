@@ -1,6 +1,6 @@
 /*
  * File: 102-zombie.c
- * Author: Bakare Tolulope
+ * Auth: Tolulope Bakare
  */
 
 #include <stdio.h>
