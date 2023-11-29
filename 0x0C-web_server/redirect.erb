@@ -1,0 +1,12 @@
+server {
+    listen 80;
+    MercfulMary.tech;
+
+    location /redirect_me {
+        return 301 /;
+    }
+
+    location / {
+        return 404;
+    }
+}

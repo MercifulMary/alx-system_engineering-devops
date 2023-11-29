@@ -1,3 +1,3 @@
-0x0C. Web serve
-
+## Web Server
+This project is about setting up my domain name
 -y on apt-get commandr
