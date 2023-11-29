@@ -18,9 +18,12 @@ printf %s "server {
      root        /etc/nginx/html;
      index       index.html index.htm;
 
-     location   /redirect_me  {
-          return 301 https://github.com/MercifulMary;
+     location   / {
+           try_files  \$uri \$uri/ =404;
   }
+     if (\$request_filename ~ redirect_me){
+	     rewrite ^ https://github.com permanent;
+     }
 }
 " > /etc/nginx/sites-available/default
 
