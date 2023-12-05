@@ -1,20 +1,23 @@
 #!/usr/bin/env bash
-# install haproxy version 2.8 on ubuntu
-# enables managent via init script
-# distribute traffic between servers using roundrobin algorithm
-sudo apt-get update
-sudo apt-get install --no-install-recommends software-properties-common
-add-apt-repository ppa:vbernat/haproxy-2.8
-sudo apt-get install -y  haproxy=2.8.\*
+# Installs HAProxy version 1.8 with the following configurations:
+#+    Enables management via the init script.
+#+    Distributes requests using a round-robin algorithm.
+
+apt-get install -y software-properties-common
+add-apt-repository -y ppa:vbernat/haproxy-1.8
+apt-get update
+apt-get install -y haproxy=1.8.\*
 
 echo "ENABLED=1" >> /etc/default/haproxy
-mv /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.original
+mv /etc/haproxy/haproxy.cfg{,.original}
 touch /etc/haproxy/haproxy.cfg
+
 printf %s "global
     log 127.0.0.1 local0 notice
     maxconn 2000
     user haproxy
     group haproxy
+
 defaults
     log     global
     mode    http
@@ -25,15 +28,17 @@ defaults
     timeout connect  5000
     timeout client  10000
     timeout server  10000
-frontend myfrontend
+
+listen hbnb
+    bind 0.0.0.0:80
     mode http
-    bind *:80
-    default_backend my_servers
-backend my_servers
-    mode http
+    stats enable
+    stats uri /haproxy?stats
     balance roundrobin
+    option httpclose
+    option forwardfor
     server 345887-web-01 54.157.190.37:80 check
-    server 345887-web-02 100.26.155.142:80
-check
+    server 345887-web-02 100.26.155.142:80 check
 " >> /etc/haproxy/haproxy.cfg
+
 service haproxy start
