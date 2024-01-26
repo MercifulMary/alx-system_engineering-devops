@@ -1,0 +1,13 @@
+[Unit]
+Description=gunicorn service to start gunicorn on system boot
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/AirBnB_clone_v4
+ExecStart=/usr/bin/gunicorn web_dynamic.2-hbnb:app -c gunicorn.conf.py
+ExecReload=/bin/kill -s HUP $MAINPID
+
+[Install]
+WantedBy=multi-user.target
